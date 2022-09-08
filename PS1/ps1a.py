@@ -59,13 +59,12 @@ def greedy_cow_transport(cows,limit=10):
     """
     # TODO: Your code here
     trips = []
-
-    cow_list=sorted(((value, key) for (key,value) in cows.items()), reverse=True)
+    cow_list = sorted(((value, key) for (key,value) in cows.items()), reverse=True)
     while cow_list:
         current_weight = 0
         trip = []
         for cow in cow_list:
-            if(cow[0]>limit):
+            if(cow[0] > limit):
                 cow_list.remove(cow)
             if (current_weight + cow[0] <= limit):
                 trip.append(cow[1])
