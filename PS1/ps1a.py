@@ -6,6 +6,7 @@
 
 from ps1_partition import get_partitions
 import time
+import json
 
 #================================
 # Part A: Transporting Space Cows
@@ -25,8 +26,14 @@ def load_cows(filename):
     a dictionary of cow name (string), weight (int) pairs
     """
     # TODO: Your code here
-    pass
+    cows = {}
+    with open(filename, encoding="utf-8") as f:
+        for line in f:
+            name, weight = line.split(',')
+            cows[name] = int(weight.strip())
+    return cows
 
+#print(load_cows('./ps1_cow_data.txt'))
 # Problem 2
 def greedy_cow_transport(cows,limit=10):
     """
