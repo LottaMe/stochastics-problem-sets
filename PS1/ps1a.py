@@ -60,17 +60,20 @@ def greedy_cow_transport(cows,limit=10):
     # TODO: Your code here
     trips = []
     cow_list = sorted(((value, key) for (key,value) in cows.items()), reverse=True)
-    while cow_list:
+    for cow in cow_list:
+        if(cow[0] > limit):
+                cow_list.remove(cow)
+    cow_list_copy = cow_list.copy()
+    
+    while cow_list_copy:
         current_weight = 0
         trip = []
         for cow in cow_list:
-            if(cow[0] > limit):
-                cow_list.remove(cow)
-            if (current_weight + cow[0] <= limit):
-                # trip.append(cow)
-                trip.append(cow[1])
+            if cow in cow_list_copy and current_weight + cow[0] <= limit:
+                trip.append(cow)
+                #trip.append(cow[1])
                 current_weight += cow[0]
-                cow_list.remove(cow)
+                cow_list_copy.remove(cow)
         trips.append(trip)
     return trips
     
@@ -99,7 +102,9 @@ def brute_force_cow_transport(cows,limit=10):
     """
     # TODO: Your code here
     pass
-        
+
+# for partition in get_partitions([1,2,3]):
+#      print(partition)        
 # Problem 4
 def compare_cow_transport_algorithms():
     """
