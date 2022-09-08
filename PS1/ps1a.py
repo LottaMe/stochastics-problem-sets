@@ -33,7 +33,7 @@ def load_cows(filename):
             cows[name] = int(weight.strip())
     return cows
 
-#print(load_cows('./ps1_cow_data.txt'))
+cows_data = load_cows('./ps1_cow_data.txt')
 # Problem 2
 def greedy_cow_transport(cows,limit=10):
     """
@@ -58,8 +58,21 @@ def greedy_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+    trips = []
 
+    cow_list=sorted(((value, key) for (key,value) in cows.items()), reverse=True)
+    while cow_list:
+        current_weight = 0
+        trip = []
+        for cow in cow_list:
+            if (current_weight + cow[0] <= limit):
+                trip.append(cow[1])
+                current_weight += cow[0]
+                cow_list.remove(cow)
+        trips.append(trip)
+    return trips
+    
+print(greedy_cow_transport(cows_data, 10))
 # Problem 3
 def brute_force_cow_transport(cows,limit=10):
     """
