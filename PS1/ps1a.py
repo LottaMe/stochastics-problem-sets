@@ -70,8 +70,8 @@ def greedy_cow_transport(cows,limit=10):
         trip = []
         for cow in cow_list:
             if cow in cow_list_copy and current_weight + cow[0] <= limit:
-                trip.append(cow)
-                #trip.append(cow[1])
+                #trip.append(cow)
+                trip.append(cow[1])
                 current_weight += cow[0]
                 cow_list_copy.remove(cow)
         trips.append(trip)
