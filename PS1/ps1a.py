@@ -110,26 +110,26 @@ def brute_force_cow_transport(cows, limit=10):
     trips
     """
     # TODO: Your code here
-    def is_valid_shipment(shipment):
+    def is_valid_shipment(trip):
         weight = 0
-        for cow in shipment:
+        for cow in trip:
             weight += cow[1]
             if weight > limit:
                 return False
         return True
 
     def is_valid_partition(partition):
-        for shipment in partition:
-            if not is_valid_shipment(shipment):
+        for trip in partition:
+            if not is_valid_shipment(trip):
                 return False
         return True
     cow_list = cows.items()
-    partitions = list(get_partitions(cow_list))
-    validated_partitions = []
+    partitions = get_partitions(cow_list)
+    valid_partitions = []
     for partition in partitions:
         if is_valid_partition(partition):
-            validated_partitions.append(partition)
-    sorted_valid_partitions = sorted(validated_partitions, key=len)
+            valid_partitions.append(partition)
+    sorted_valid_partitions = sorted(valid_partitions, key=len)
     final_list = []
     for trip in sorted_valid_partitions[0]:
         t = []
