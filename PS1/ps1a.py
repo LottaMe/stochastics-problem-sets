@@ -84,7 +84,7 @@ def greedy_cow_transport(cows, limit=10):
     return trips
 
 
-print(greedy_cow_transport(cows_data, 10))
+#print(greedy_cow_transport(cows_data, 10))
 # Problem 3
 
 
@@ -139,7 +139,7 @@ def brute_force_cow_transport(cows, limit=10):
     return final_list
 
 
-print(brute_force_cow_transport(cows_data))
+# print(brute_force_cow_transport(cows_data))
 
 # Problem 4
 
@@ -158,4 +158,28 @@ def compare_cow_transport_algorithms():
     Does not return anything.
     """
     # TODO: Your code here
-    pass
+    start = time.perf_counter()
+    # code to be timed
+    greedy_cow_transport(cows_data)
+    end = time.perf_counter()
+    print("greedy_cow_transport(cows1) time")
+    greedy_time = end - start
+    print(greedy_time)
+    start = time.perf_counter()
+    # code to be timed
+    brute_force_cow_transport(cows_data)
+    end = time.perf_counter()
+    brute_time = end - start
+    print("brute_force_cow_transport(cows1) time")
+    print(brute_time)
+    if brute_time > greedy_time:
+        difference = brute_time - greedy_time
+        print("brute force algorithm took longer")
+        print("time difference was", difference)
+    else:
+        difference = greedy_time - brute_time
+        print("greedy algorithm took longer")
+        print("time difference was", difference)
+
+
+compare_cow_transport_algorithms()
