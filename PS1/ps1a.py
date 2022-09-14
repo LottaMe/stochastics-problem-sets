@@ -101,10 +101,32 @@ def brute_force_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+    cow_list = cows.items()
+    partitions = list(get_partitions(cow_list))
+    copy = partitions.copy()
+    for trips in partitions: # looping through trips
+        for trip in trips:
+            if trips not in copy:
+                break
+            current_weight = 0
+            for cow in trip:
+                if cow[1] + current_weight <= limit:
+                    current_weight += cow[1]
+                else:
+                    copy.remove(trips)
+                    break
+    sorted_valid_p = sorted(copy, key=len)
+    final_list = []
+    for trip in sorted_valid_p[0]:
+        t = []
+        for cow in trip:
+            t.append(cow[0])
+        final_list.append(t)
+    return final_list
+    
 
-# for partition in get_partitions([1,2,3]):
-#      print(partition)        
+print(brute_force_cow_transport(cows_data))
+      
 # Problem 4
 def compare_cow_transport_algorithms():
     """
